@@ -88,20 +88,10 @@ monthly_mvc_collection = ee.ImageCollection.fromImages(months.map(create_monthly
 mean_ndvi = monthly_mvc_collection.select('NDVI').mean()
 mean_ndvi = mean_ndvi.reproject('EPSG:4326', None, 10)
 
-# # Save the map to an HTML file
-# output_file_path = "vegetation_health_map.html"
-# m.to_html(output_file_path)
-# print(f"\nSUCCESS: Interactive map has been saved to: {output_file_path}")
-# print("You can open this file in your web browser.")
-
-
-# --- Part 7: EXPORT THE FINAL IMAGE TO GOOGLE DRIVE ---
-
-# The previous method of using sampleRectangle() is only for very small areas.
-# For large areas like this, the standard workflow is to export the image.
-# This process will create a task in your Google Earth Engine account.
+# 7. Visualization and Exporting the final Results
 
 # Define the export parameters.
+# This process will create a task in your Google Earth Engine account.
 export_params = {
     'image': mean_ndvi,
     'description': 'NDVI_Annual_Mean_Export',  # The name of the task
@@ -120,7 +110,7 @@ task.start()
 print("\n---------------------------------------------------------------------------")
 print("SUCCESS: Export task started successfully!")
 print(f"Task Name: {export_params['description']}")
-print("The data is NOT downloaded yet. Please follow the steps below.")
+print("The data is NOT downloaded yet. Please check your Google Drive.")
 print("---------------------------------------------------------------------------")
 
 # --- Part 8: VISUALIZE THE FINAL IMAGE IN JUPYTER LAB ---
@@ -140,20 +130,19 @@ ndvi_vis_params = {'min': 0.0, 'max': 0.8, 'palette': ndvi_palette}
 map_center = aoi.centroid().coordinates().get(1).getInfo(), aoi.centroid().coordinates().get(0).getInfo()
 
 # Create an interactive map object.
-m = geemap.Map(center=map_center, zoom=11)
-m.add_basemap('SATELLITE')
+vis_map = geemap.Map(center=map_center, zoom=11)
+vis_map.add_basemap('SATELLITE')
 
 # Add your final NDVI image as a layer to the map.
-# We .clip(aoi) to make the visualization clean and confined to our AOI.
-m.addLayer(
+vis_map.addLayer(
     mean_ndvi.clip(aoi),
     ndvi_vis_params,
     'Mean Annual NDVI'
 )
 
 # Add a color bar legend and a layer control to the map.
-m.add_colorbar(ndvi_vis_params, label="Mean Annual NDVI")
-m.add_layer_control()
+vis_map.add_colorbar(ndvi_vis_params, label="Mean Annual NDVI")
+vis_map.add_layer_control()
 
 # Display the map in your Jupyter Lab output cell.
-m
+vis_map
