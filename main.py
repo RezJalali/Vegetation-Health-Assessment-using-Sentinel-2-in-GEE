@@ -4,7 +4,7 @@ import numpy as np
 
 # Getting an authorization token from Google Earth Engine
 try:
-    ee.Initialize('github-projects-464906')
+    ee.Initialize() # enter your defined cloud project to get access to GEE server
 except Exception as e:
     ee.Authenticate()
     ee.Initialize()
