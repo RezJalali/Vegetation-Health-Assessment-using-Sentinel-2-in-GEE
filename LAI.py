@@ -12,7 +12,7 @@ except Exception as e:
 
 # 1. DEFINE YOUR AREA OF INTEREST (AOI) AND TIME FRAME
 aoi = ee.Geometry.Rectangle([47.95, 29.55, 49.38, 32.43])
-start_date = '2020-01-01'
+start_date = '2023-01-01'
 end_date = '2025-01-01'
 # Define a smaller region of a known cropland to visualize LAI time series dynamics 
 time_series_aoi = ee.Geometry.Rectangle([48.180, 30.859, 48.364, 31.080])
@@ -84,7 +84,7 @@ print("\nGenerating a map preview for your notebook...")
               # Blue  # Yellow    # Green
               # water # bare-ground # dense vegetation 
 LAI_palette = ['2308ff','fffd1e','21cd12']
-LAI_vis_params = {'min': -3, 'max': 4, 'palette': LAI_palette}
+LAI_vis_params = {min=-0.5,max=2,'palette': LAI_palette}
 
 # Calculate the center of your AOI to center the map.
 map_center = aoi.centroid().coordinates().get(1).getInfo(), aoi.centroid().coordinates().get(0).getInfo()
@@ -106,6 +106,7 @@ vis_map.add_layer_control()
 
 # Display the map in your Jupyter Lab output cell.
 display(vis_map)
+
 #===========================================================================
 # Time Series Visualization over a known crop land
 #===========================================================================
@@ -125,7 +126,12 @@ mean_lai_series =  LAI_collection.map(mean_region)
 timeseries_info = mean_lai_series.getInfo()
 
 # Extract the properties from the feature collection
-data = [{'time': f['properties']['system:time_start'], 'mean': f['properties']['mean']} for f in timeseries_info['features']]
+data = []
+for f in timeseries_info['features']:
+    try:
+        data.append({'time': f['properties']['system:time_start'], 'mean': f['properties']['mean']})
+    except:
+        continue
 
 df = pd.DataFrame(data)
 # Remove any null values that might result from fully masked images
@@ -144,6 +150,7 @@ plt.xlabel('Date')
 plt.ylabel('Mean LAI')
 plt.grid(True)
 plt.show()
+
 
 
 # Export to Drive
