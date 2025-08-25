@@ -3,18 +3,13 @@ This repository provides a collection of Python scripts that leverage the Google
 
 The scripts are designed to be easily customizable and include automated export features for generating analysis-ready GeoTIFFs, along with interactive map previews for immediate visualization within a Jupyter environment.
 
-Features ✨
-Multi-Index Support: Includes ready-to-use scripts for calculating both NDVI and LAI.
-
-Robust Cloud Masking: Automatically handles different Sentinel-2 processing baselines by using the QA60 band and falling back to the SCL (Scene Classification Layer) for robust cloud removal.
-
-Advanced Compositing: Uses a Maximum Value Composite (MVC) approach for NDVI to capture peak vegetation greenness and minimize atmospheric interference.
-
-Time-Series Analysis: The LAI script demonstrates how to generate and plot a time-series chart for a specific region, perfect for monitoring crop growth cycles.
-
-Automated Export: Easily export the final, high-resolution raster data directly to your Google Drive.
-
-Interactive Visualization: Instantly preview results on an interactive map within your Jupyter Notebook, complete with legends and layer controls.
+Features ✨:
+- Multi-Index Support: Includes ready-to-use scripts for calculating both NDVI and LAI.
+- Robust Cloud Masking: Automatically handles different Sentinel-2 processing baselines by using the QA60 band and falling back to the SCL (Scene Classification Layer) for robust cloud removal.
+- Advanced Compositing: Uses a Maximum Value Composite (MVC) approach for NDVI to capture peak vegetation greenness and minimize atmospheric interference.
+- Time-Series Analysis: The LAI script demonstrates how to generate and plot a time-series chart for a specific region, perfect for monitoring crop growth cycles.
+- Automated Export: Easily export the final, high-resolution raster data directly to your Google Drive.
+- Interactive Visualization: Instantly preview results on an interactive map within your Jupyter Notebook, complete with legends and layer controls.
 
 # Included Methods
 This repository currently includes the following vegetation analysis scripts:
