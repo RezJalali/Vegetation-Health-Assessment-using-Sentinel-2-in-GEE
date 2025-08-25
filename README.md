@@ -14,7 +14,7 @@ Features ✨:
 # Included Methods
 This repository currently includes the following vegetation analysis scripts:
 
-1. NDVI.py - Annual Mean NDVI using MVC
+## 1. NDVI.py - Annual Mean NDVI using MVC
 This script calculates the annual mean Normalized Difference Vegetation Index (NDVI), a primary indicator of vegetation density and health. To create a robust, cloud-free annual summary, it uses a Maximum Value Composite (MVC) technique.
 
 **Methodology:** For each month, the script creates a composite image by selecting the pixel with the highest NDVI value from all images captured during that month. These monthly composites are then averaged to produce a smooth and representative annual mean NDVI map.
@@ -22,7 +22,7 @@ This script calculates the annual mean Normalized Difference Vegetation Index (N
 **Use Case:** Ideal for assessing overall vegetation health for a year, identifying agricultural zones, and monitoring deforestation.
 ![1](https://github.com/user-attachments/assets/bb32ee3e-f093-4e7e-bae1-276a3f95947e)
 
-2. LAI.py - Leaf Area Index Time Series
+## 2. LAI.py - Leaf Area Index Time Series
 This script calculates the Leaf Area Index (LAI), which is a measure of the total leaf area per unit of ground area. It is a critical variable for understanding plant canopy structure and growth.
 
 **Methodology:** LAI is derived from the Weighted Difference Vegetation Index (WDVI) using an empirical formula. The script processes an entire time series of images and calculates the mean LAI over a specific region of interest for each image.
