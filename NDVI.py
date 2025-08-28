@@ -146,3 +146,4 @@ vis_map.add_layer_control()
 
 # Display the map in your Jupyter Lab output cell.
 vis_map
+
